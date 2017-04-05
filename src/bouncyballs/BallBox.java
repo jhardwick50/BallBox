@@ -24,6 +24,21 @@ public class BallBox extends JPanel implements MouseListener{
     
     public BallBox(){
         this.addMouseListener(this);
+        
+        Thread boxThread = new Thread(){
+            @Override
+            public void run() {
+                while (true){
+                    repaint();
+                    
+                    try{
+                        Thread.sleep(1000/30);
+                    }catch (InterruptedException e){}
+                }
+            }
+            
+        };
+        boxThread.start();
     }
     
     @Override
@@ -36,7 +51,7 @@ public class BallBox extends JPanel implements MouseListener{
         for( int i = 0;i < balls.size();++i){
             
             Ball current = balls.get(i);
-            System.out.println("drawing ball at "+current.getX() + "," +current.getY());
+            //System.out.println("drawing ball at "+current.getX() + "," +current.getY());
             g.fillOval(current.getX(), current.getY(), 10, 10);
         }
     }
@@ -47,14 +62,14 @@ public class BallBox extends JPanel implements MouseListener{
         if(balls.size() >= 25){
             return;
         }
-        System.out.println("new ball created from mouse click");
+        //System.out.println("new ball created from mouse click");
         Ball ball = new Ball(rng.nextInt(500),rng.nextInt(500));
         balls.add(ball);
         
         
         
         
-        this.repaint();//TODO: repainting should happen from thread not manually on click.(or both?)
+       // this.repaint();//TODO: repainting should happen from thread not manually on click.(or both?)
     }   
         
         
