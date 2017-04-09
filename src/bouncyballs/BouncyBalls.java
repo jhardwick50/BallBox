@@ -5,6 +5,7 @@
  */
 package bouncyballs;
 
+import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -27,9 +28,10 @@ public class BouncyBalls {
         
         frame.add(box);
         
-        box.setSize(500,500);
+        //box.setSize(500,500);
+                box.setBackground(Color.white);
         
-        frame.setSize(500, 500);
+        frame.setSize(550, 550);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         

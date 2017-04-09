@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @author Jason
  */
 public class BallBox extends JPanel implements MouseListener{
-    private Random rng = new Random(500);
+    private Random rng = new Random();
     private ArrayList<Ball> balls = new ArrayList<>();
     
     public BallBox(){
@@ -45,42 +45,32 @@ public class BallBox extends JPanel implements MouseListener{
     
     public void updateCoordinates(List<Ball> balls){
         for(Ball ball : balls) {
-            int x = ball.getX();
-            int y = ball.getY();
+            double x = ball.getX();
+            double y = ball.getY();
+           
+            double newX = x + ball.getDirectionX();
+            double newY = y + ball.getDirectionY();
 
-
+            if (newX < 5 || newX > 495) {
+                System.out.print("Ball " + ball.getId() + ": X went off screen at " + newX);       
+                newX = (int) (x - ball.getDirectionX());
+                ball.setDirectionX(-1 * ball.getDirectionX());
+                System.out.println(" -- X direction is flipped to " + ball.getDirectionX());
+            }
             
-            int newX = x + (int)(5 * Math.cos(ball.getAngle()));
-            int newY = y + (int)(5 * Math.sin(ball.getAngle()));
+            if (newY < 5 || newY > 495) {
+                System.out.print("Ball " + ball.getId() + ": Y went off screen at " + newY);  
+                newY = (int) (y - ball.getDirectionY());
+                ball.setDirectionY(-1 * ball.getDirectionY());
+                System.out.println(" -- Y direction is flipped to " + ball.getDirectionY());
+            }
+            //System.out.println("After x,y: " + newX + "," + newY);
             
-            ball.setX(newX);
-            ball.setY(newY);
+            ball.setX((int) newX);
+            ball.setY((int) newY);
             
             
-        }
-    }
-    
-    public int angleX(int direction) {
-        if (direction <= 90) {
-            return 90 - direction;
-        } else if (direction > 90 && direction <= 180) {
-            return 90 - direction;
-        } else if (direction > 180 && direction <= 270) {
-            return direction - 270;
-        } else {
-            return direction - 270;
-        }
-    }
-    
-    public int angleY(int direction) {
-                if (direction <= 90) {
-            return 90 - direction;
-        } else if (direction > 90 && direction <= 180) {
-            return 90 - direction;
-        } else if (direction > 180 && direction <= 270) {
-            return direction - 270;
-        } else {
-            return direction - 270;
+            
         }
     }
     
@@ -95,7 +85,7 @@ public class BallBox extends JPanel implements MouseListener{
             
             Ball current = balls.get(i);
             //System.out.println("drawing ball at "+current.getX() + "," +current.getY());
-            g.fillOval(current.getX(), current.getY(), 10, 10);
+            g.fillOval((int) current.getX(), (int) current.getY(), 10, 10);
         }
     }
     
@@ -108,8 +98,10 @@ public class BallBox extends JPanel implements MouseListener{
         //System.out.println("new ball created from mouse click");
         int x = rng.nextInt(500);
         int y = rng.nextInt(500);
-        int angle = (int)(Math.random() * 2.0 * Math.PI);
-        Ball ball = new Ball(x, y, angle);
+        double angle = Math.random() * 2.0 * Math.PI;
+        
+        Ball ball = new Ball(balls.size() + 1, x, y, angle, 2);
+        System.out.println("Ball " + ball.getId() + ": generated at " + x + "," + y + " with angle " + angle);
         balls.add(ball);
         
         

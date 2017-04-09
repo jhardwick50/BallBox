@@ -10,30 +10,50 @@ package bouncyballs;
  * @author Jason
  */
 class Ball {
-    private int x;
-    private int y;
+    private int id;
+    private double x;
+    private double y;
     private double angle;
+    private double velocity;
+    private double directionX;
+    private double directionY;
     
-    public Ball(int x,int y,double angle){
+    public Ball(int id, int x,int y, double angle, double velocity){
+        this.id = id;
         this.x = x;
         this.y = y;
         this.angle = angle;
-
+        this.velocity = velocity;
+        this.directionX = velocity * Math.cos(angle);
+        this.directionY = velocity * Math.sin(angle);
     }
 
-   
-    public double getAngle() {
-        return angle;
+    public int getId() {
+        return id;
     }
 
-   
     
+    public double getDirectionX() {
+        return directionX;
+    }
 
-    public int getX() {
+    public double getDirectionY() {
+        return directionY;
+    }
+
+    public void setDirectionX(double directionX) {
+        this.directionX = directionX;
+    }
+
+    public void setDirectionY(double directionY) {
+        this.directionY = directionY;
+    }
+    
+    public double getX() {
         return x;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
