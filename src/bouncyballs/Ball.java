@@ -12,12 +12,22 @@ package bouncyballs;
 class Ball {
     private int x;
     private int y;
+    private double angle;
     
-    public Ball(int x,int y){
+    public Ball(int x,int y,double angle){
         this.x = x;
         this.y = y;
-        
+        this.angle = angle;
+
     }
+
+   
+    public double getAngle() {
+        return angle;
+    }
+
+   
+    
 
     public int getX() {
         return x;
