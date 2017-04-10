@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author: Jason Hardwick
+    CIS 314
+    Module 4
  */
 package bouncyballs;
 
@@ -18,6 +18,8 @@ class Ball {
     private double directionX;
     private double directionY;
     
+    //ball constructor
+    
     public Ball(int id, int x,int y, double angle, double velocity){
         this.id = id;
         this.x = x;
@@ -27,7 +29,7 @@ class Ball {
         this.directionX = velocity * Math.cos(angle);
         this.directionY = velocity * Math.sin(angle);
     }
-
+    //for testing
     public int getId() {
         return id;
     }

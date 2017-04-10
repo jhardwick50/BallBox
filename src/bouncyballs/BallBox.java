@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Author: Jason Hardwick
+    CIS 314
+    Module 4
  */
 package bouncyballs;
 
@@ -25,7 +25,7 @@ public class BallBox extends JPanel implements MouseListener{
     
     public BallBox(){
         this.addMouseListener(this);
-        
+        //creating thread when balls are created
         Thread boxThread = new Thread(){
             @Override
             public void run() {
@@ -42,7 +42,7 @@ public class BallBox extends JPanel implements MouseListener{
         };
         boxThread.start();
     }
-    
+    //updates ball coordinates when collisions occur.
     public void updateCoordinates(List<Ball> balls){
         for(Ball ball : balls) {
             double x = ball.getX();
@@ -52,17 +52,17 @@ public class BallBox extends JPanel implements MouseListener{
             double newY = y + ball.getDirectionY();
 
             if (newX < 5 || newX > 495) {
-                System.out.print("Ball " + ball.getId() + ": X went off screen at " + newX);       
+                //System.out.print("Ball " + ball.getId() + ": X went off screen at " + newX);       
                 newX = (int) (x - ball.getDirectionX());
                 ball.setDirectionX(-1 * ball.getDirectionX());
-                System.out.println(" -- X direction is flipped to " + ball.getDirectionX());
+               // System.out.println(" -- X direction is flipped to " + ball.getDirectionX());
             }
             
             if (newY < 5 || newY > 495) {
-                System.out.print("Ball " + ball.getId() + ": Y went off screen at " + newY);  
+                //System.out.print("Ball " + ball.getId() + ": Y went off screen at " + newY);  
                 newY = (int) (y - ball.getDirectionY());
                 ball.setDirectionY(-1 * ball.getDirectionY());
-                System.out.println(" -- Y direction is flipped to " + ball.getDirectionY());
+                //System.out.println(" -- Y direction is flipped to " + ball.getDirectionY());
             }
             //System.out.println("After x,y: " + newX + "," + newY);
             
@@ -73,10 +73,10 @@ public class BallBox extends JPanel implements MouseListener{
             
         }
     }
-    
+    //draws balls on screen
     @Override
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g); //To change body of generated methods, choose Tools | Templates.
+        super.paintComponent(g); 
         
         g.setColor(Color.blue);
         
@@ -89,7 +89,7 @@ public class BallBox extends JPanel implements MouseListener{
         }
     }
     
-    
+    //creates new ball when mouse is clicked
     @Override
     public void mouseClicked(MouseEvent e) {
         if(balls.size() >= 25){
@@ -101,7 +101,7 @@ public class BallBox extends JPanel implements MouseListener{
         double angle = Math.random() * 2.0 * Math.PI;
         
         Ball ball = new Ball(balls.size() + 1, x, y, angle, 2);
-        System.out.println("Ball " + ball.getId() + ": generated at " + x + "," + y + " with angle " + angle);
+       // System.out.println("Ball " + ball.getId() + ": generated at " + x + "," + y + " with angle " + angle);
         balls.add(ball);
         
         

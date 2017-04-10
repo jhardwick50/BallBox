@@ -1,7 +1,7 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ *  Author: Jason Hardwick
+    CIS 314
+    Module 4
  */
 package bouncyballs;
 
@@ -12,10 +12,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author Jason
- */
+
 public class BouncyBalls {
 
     /**
